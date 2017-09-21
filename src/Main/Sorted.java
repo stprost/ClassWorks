@@ -34,9 +34,29 @@ public class Sorted {
             t = a[i];
             for (int j = i - 1; j >= 0; j--) {
                 if (a[j] > a[j + 1]) {
-                    a[j+1] = a[j];
+                    a[j + 1] = a[j];
                     a[j] = t;
                 }
+            }
+        }
+    }
+
+    public static void sort3(int a[]) {
+        int n = a.length;
+        int min = a[0];
+        int max = a[0];
+        int k = 0;
+        for (int i = 0; i < n; i++) {
+            if (a[i] < min) min = a[i];
+            if (a[i] > max) max = a[i];
+        }
+        int count[] = new int[max - min + 1];
+        for (int i = 0; i < a.length; i++) count[a[i] - min]++;
+        for (int j = 0; j < count.length; j++) {
+            while (count[j] > 0) {
+                a[k] = j + min;
+                k++;
+                count[j]--;
             }
         }
     }
