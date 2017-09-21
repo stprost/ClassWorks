@@ -5,7 +5,7 @@ public class Mas {
 
     public static void main(String[] args) {
         Sorted.prn(a);
-        Sorted.sort3(a);
+        Sorted.sort2(a);
         System.out.println("Sorted:");
         Sorted.prn(a);
     }

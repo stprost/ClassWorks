@@ -30,14 +30,16 @@ public class Sorted {
     public static void sort2(int a[]) {
         int n = a.length;
         int t;
+        int j;
         for (int i = 1; i < n; i++) {
             t = a[i];
-            for (int j = i - 1; j >= 0; j--) {
-                if (a[j] > a[j + 1]) {
+            for (j = i - 1; j >= 0; j--) {
+                if (a[j] > t) {
                     a[j + 1] = a[j];
-                    a[j] = t;
                 }
+                else break;
             }
+            a[j+1] = t;
         }
     }
 
