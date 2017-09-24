@@ -11,6 +11,7 @@ public class MaxSubarray {
         System.out.println(max(a).toString());
     }
 
+    //Заполнение массива случайными числами
     public static void fill(int a[]) {
         int n = a.length;
         Random random = new Random();
@@ -19,6 +20,7 @@ public class MaxSubarray {
         }
     }
 
+    //Сумма элементов массива
     public static int elemSum(ArrayList<Integer> a) {
         int sum = 0;
         for (Integer el : a) {
@@ -27,6 +29,7 @@ public class MaxSubarray {
         return sum;
     }
 
+    //Нахождение максимального подмассива
     public static ArrayList max(int a[]) {
         ArrayList ans = new ArrayList();
         ArrayList temp = new ArrayList();
