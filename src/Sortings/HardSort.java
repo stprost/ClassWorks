@@ -1,4 +1,4 @@
-package Main;
+package Sortings;
 
 import java.util.Arrays;
 
@@ -18,9 +18,9 @@ public class HardSort {
     }
 
     public static void heapSort(int a[]) {
-        int n = a.length;
+        int n = a.length - 1;
         for (int i = n / 2 - 2; i >= 0; i--) f(a, i, n);
-        for (int i = n - 1; i > 0; i--) {
+        for (int i = n; i > 0; i--) {
             f(a, 0, i);
             int t = a[0];
             a[0] = a[i];
@@ -35,6 +35,7 @@ public class HardSort {
         int i = l;
         int j = m;
         while (i <= j) {
+
             if (a[i] >= t && a[j] <= t) {
                 k = a[i];
                 a[i] = a[j];
@@ -60,8 +61,26 @@ public class HardSort {
         int right[] = Arrays.copyOfRange(a, m + 1, r + 1);
         int i = 0;
         int j = 0;
-        for (int k = 0; k <= r; k++){
-            //if (left[i] < right[j]) a[i]
+        for (int k = l; k <= r; k++) {
+           if (j > right.length-1 || (i < left.length && left[i] < right[j])){
+               a[k] = left[i];
+               i++;
+           }else {
+               a[k] = right[j];
+               j++;
+           }
         }
+    }
+
+    public static void sort(int a[], int l, int r) {
+        if (l == r) return;
+        int m = (l + r) / 2;
+        sort(a, l, m);
+        sort(a, m + 1, r);
+        merge(a, l, m, r);
+    }
+
+    public static void meggeSort(int a[]) {
+        sort(a, 0, a.length - 1);
     }
 }
