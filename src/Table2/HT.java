@@ -16,25 +16,29 @@ public class HT {
 
     public HT(int length) {
         this.length = length;
-        table = new ArrayList<>(length);
+        table = new ArrayList<>();
+        for (int i = 0; i < length; i++) {
+            table.add(null);
+        }
     }
 
     public static void put(String k, String v) {
         Data data = new Data(k, v);
         int temp = hashFun(k);
         int count = 0;
-        if (table.get(temp) == null) table.add(temp, data);
+        if (table.get(temp) == null) table.set(temp, data);
         else {
             for (int i = 1; i < length - 1; i++) {
                 int ind = i + temp;
-                if (ind >= length) ind -= length;
+                if (ind > length-1) ind -= length;
                 if (table.get(ind) == null) {
-                    table.add(ind, data);
+                    table.set(ind, data);
                     count++;
                     break;
                 }
             }
             if (count == 0) table.add(data);
+            length++;
         }
     }
 
@@ -57,7 +61,10 @@ public class HT {
 
     public static void prn() {
         for (int i = 0; i < length; i++) {
-            System.out.print("[" + i + "] -> " + table.get(i));
+            if (table.get(i) == null) System.out.println("[" + i + "] -> null");
+            else {
+                System.out.println("[" + i + "] -> " + "(" + table.get(i).getKey() + ", " + table.get(i).getValue() + ")");
+            }
         }
     }
 }

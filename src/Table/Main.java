@@ -7,6 +7,8 @@ public class Main {
         t.put("ca", "t");
         t.put("cd", "t");
         t.put("cca", "t");
+        t.put("cc", "t");
+        t.put("ce", "t");
         String answ = t.get("cd");
         System.out.println(answ);
         t.prn();
