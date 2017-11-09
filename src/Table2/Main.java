@@ -6,10 +6,15 @@ public class Main {
         HT t = new HT(5);
         t.put("a", "w");
         t.put("b", "w");
-        t.put("c", "w");
+        t.put("c", "aaa");
         t.put("d", "w");
         t.put("e", "w");
         t.put("f", "w");
+        t.remove("f");
         t.prn();
+        System.out.println();
+        String answ = t.get("c");
+        System.out.println(answ);
+        System.out.println();
     }
 }
