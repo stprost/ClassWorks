@@ -1,7 +1,9 @@
 package BStree;
 
-
-import com.sun.xml.internal.ws.api.ha.StickyFeature;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Deque;
+import java.util.Queue;
 
 public class BinarySearchTree {
     private static Node root;
@@ -11,7 +13,7 @@ public class BinarySearchTree {
     public static Node find(int key) {
         Node tempNode = root;
         if (tempNode == null) return null;
-        while (tempNode.getKey()!= key) {
+        while (tempNode.getKey() != key) {
             if (tempNode.getKey() < key) tempNode = tempNode.getRight();
             else tempNode = tempNode.getLeft();
             if (tempNode == null) return null;
@@ -105,17 +107,33 @@ public class BinarySearchTree {
             }
         }
     }
-    private static String prnch(Node node){
-        String str = "";
-        str += node.getLeft().getKey();
-        str += node.getRight().getKey();
-        return str;
-    }
+
 
     public static void prn() {
+        int Size = 1;
         Node tempNode = root;
-        while (tempNode != null) {
-
+        ArrayDeque<Node> nodeQueue = new ArrayDeque<>();
+        nodeQueue.addFirst(tempNode);
+        System.out.println(root.getKey());
+        while (!nodeQueue.isEmpty()) {
+            int prevSize = Size;
+            for (int i = 0; i < prevSize; i++) {
+                if (nodeQueue.getLast().getLeft() != null) {
+                    nodeQueue.addFirst(nodeQueue.getLast().getLeft());
+                    System.out.print(nodeQueue.getLast().getLeft().getKey() + " ");
+                    Size++;
+                } else System.out.print("_ ");
+                if (nodeQueue.getLast().getRight() != null) {
+                    nodeQueue.addFirst(nodeQueue.getLast().getRight());
+                    System.out.print(nodeQueue.pollLast().getRight().getKey() + " ");
+                    Size++;
+                } else {
+                    nodeQueue.pollLast();
+                    System.out.print("_ ");
+                }
+            }
+            System.out.println();
+            Size = Size - prevSize;
         }
     }
 }
