@@ -31,28 +31,29 @@ public class BinarySearchTree {
         Node parentNode;
         if (root == null) {
             root = newNode;
-        } else {
-            Node tempNode = root;
-            while (tempNode != newNode) {
-                if (tempNode.getKey() == newNode.getKey()) break;
-                parentNode = tempNode;
-                if (key > tempNode.getKey()) {
-                    tempNode = tempNode.getRight();
-                    if (tempNode == null) {
-                        parentNode.setRight(newNode);
-                        newNode.setParent(parentNode);
-                        tempNode = newNode;
-                    }
-                } else {
-                    tempNode = tempNode.getLeft();
-                    if (tempNode == null) {
-                        parentNode.setLeft(newNode);
-                        newNode.setParent(parentNode);
-                        tempNode = newNode;
-                    }
+            return;
+        }
+        Node tempNode = root;
+        while (tempNode != newNode) {
+            if (tempNode.getKey() == newNode.getKey()) break;
+            parentNode = tempNode;
+            if (key > tempNode.getKey()) {
+                tempNode = tempNode.getRight();
+                if (tempNode == null) {
+                    parentNode.setRight(newNode);
+                    newNode.setParent(parentNode);
+                    tempNode = newNode;
+                }
+            } else {
+                tempNode = tempNode.getLeft();
+                if (tempNode == null) {
+                    parentNode.setLeft(newNode);
+                    newNode.setParent(parentNode);
+                    tempNode = newNode;
                 }
             }
         }
+
     }
 
 

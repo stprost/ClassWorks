@@ -12,7 +12,12 @@ public class Main {
         bst.addNode(18);
         bst.prn();
         System.out.println();
-        bst.remove(10);
+        bst.remove(5);
         bst.prn();
+        bst.addNode(2);
+        bst.prn();
+        System.out.println(bst.contains(20));
+        System.out.println(bst.contains(12));
+
     }
 }
