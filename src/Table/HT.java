@@ -20,13 +20,19 @@ public class HT {
         table = new List[length];
     }
 
-    public static void put(String k, String v) {
-        Data data = new Data(k, v);
+    public static String put(String k, String v) {
+        String str = get(k);
         int temp = hashFun(k);
-        if (table[temp] == null) {
-            table[temp] = new ArrayList<Data>();
+        if (str == "null") {
+            Data data = new Data(k, v);
+            if (table[temp] == null) {
+                table[temp] = new ArrayList<Data>();
+            }
+            table[temp].add(data);
+        }else{
+            for (Data data : table[temp]) if (data.getKey() == k) data.setValue(v);
         }
-        table[temp].add(data);
+        return str;
     }
 
     public static String get(String k) {
@@ -37,7 +43,8 @@ public class HT {
         return "null";
     }
 
-    public static void remove(String k) {
+    public static String  remove(String k) {
+        String str = get(k);
         int temp = hashFun(k);
         if (table[temp] != null) {
             int ind = 0;
@@ -47,15 +54,15 @@ public class HT {
                 }
             table[temp].remove(ind);
         }
-
+        return str;
     }
 
     public static void prn() {
         for (int i = 0; i < length; i++) {
-            if (table[i] == null) System.out.print("["+i+"] -> null");
+            if (table[i] == null) System.out.print("[" + i + "] -> null");
             else {
-                System.out.print("["+i+"]");
-                for (Data data : table[i]) System.out.print(" -> ("+data.getKey()+", "+data.getValue()+")");
+                System.out.print("[" + i + "]");
+                for (Data data : table[i]) System.out.print(" -> (" + data.getKey() + ", " + data.getValue() + ")");
             }
             System.out.println();
         }

@@ -23,24 +23,37 @@ public class HT {
         }
     }
 
-    public static void put(String k, String v) {
-        Data data = new Data(k, v);
+    public static String put(String k, String v) {
+        String str = get(k);
         int temp = hashFun(k);
-        int count = 0;
-        if (table.get(temp) == null) table.set(temp, data);
-        else {
-            for (int i = 1; i < length - 1; i++) {
+        if (str == "null") {
+            Data data = new Data(k, v);
+            int count = 0;
+            if (table.get(temp) == null) table.set(temp, data);
+            else {
+                for (int i = 1; i < length; i++) {
+                    int ind = i + temp;
+                    if (ind > length - 1) ind -= length;
+                    if (table.get(ind) == null || table.get(ind) == flag) {
+                        table.set(ind, data);
+                        length--;
+                        count++;
+                        break;
+                    }
+                }
+                if (count == 0) table.add(data);
+                length++;
+            }
+        } else {
+            for (int i = 0; i < length; i++) {
                 int ind = i + temp;
-                if (ind > length - 1) ind -= length;
-                if (table.get(ind) == null || table.get(ind) == flag) {
-                    table.set(ind, data);
-                    count++;
-                    break;
+                if (ind >= length) ind -= length;
+                if (table.get(ind)!= null && table.get(ind).getKey() == k) {
+                    table.get(ind).setValue(v);
                 }
             }
-            if (count == 0) table.add(data);
-            length++;
         }
+        return str;
     }
 
     public static String get(String k) {
@@ -48,14 +61,15 @@ public class HT {
         for (int i = 0; i < length; i++) {
             int ind = i + temp;
             if (ind >= length) ind -= length;
-            if (table.get(ind).getKey() == k) {
+            if (table.get(ind)!= null && table.get(ind).getKey() == k) {
                 return table.get(ind).getValue();
             }
         }
         return "null";
     }
 
-    public static void remove(String k) {
+    public static String  remove(String k) {
+        String str = get(k);
         int temp = hashFun(k);
         for (int i = 0; i < length; i++) {
             int ind = i + temp;
@@ -64,6 +78,7 @@ public class HT {
                 table.set(ind, flag);
             }
         }
+        return str;
     }
 
     public static void prn() {
