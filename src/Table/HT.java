@@ -12,7 +12,7 @@ public class HT {
     }
 
     public static int hashFun(String key) {
-        return key.hashCode() % length;
+        return Math.abs(key.hashCode()) % length;
     }
 
     public HT(int length) {
@@ -20,17 +20,25 @@ public class HT {
         table = new List[length];
     }
 
+    public HT() {
+        this.length = 5;
+        table = new List[length];
+    }
+
+
     public static String put(String k, String v) {
         String str = get(k);
         int temp = hashFun(k);
-        if (str == "null") {
+        if (str == null) {
             Data data = new Data(k, v);
             if (table[temp] == null) {
                 table[temp] = new ArrayList<Data>();
             }
             table[temp].add(data);
         }else{
-            for (Data data : table[temp]) if (data.getKey() == k) data.setValue(v);
+            for (Data data : table[temp])
+                if (data.getKey().equals(k))
+                    data.setValue(v);
         }
         return str;
     }
@@ -38,23 +46,27 @@ public class HT {
     public static String get(String k) {
         int temp = hashFun(k);
         if (table[temp] != null) {
-            for (Data data : table[temp]) if (data.getKey() == k) return data.getValue();
+            for (Data data : table[temp])
+                if (data.getKey().equals(k))
+                    return data.getValue();
         }
-        return "null";
+        return null;
     }
 
     public static String  remove(String k) {
         String str = get(k);
         int temp = hashFun(k);
+        // == null ret
         if (table[temp] != null) {
             int ind = 0;
             for (Data data : table[temp])
-                if (data.getKey() == k) {
+                if (data.getKey().equals(k)) {
                     ind = table[temp].indexOf(data);
                 }
             table[temp].remove(ind);
         }
         return str;
+        // ret null
     }
 
     public static void prn() {
