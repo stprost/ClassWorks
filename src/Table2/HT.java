@@ -48,7 +48,7 @@ public class HT {
             for (int i = 0; i < length; i++) {
                 int ind = i + temp;
                 if (ind >= length) ind -= length;
-                if (table.get(ind)!= null && table.get(ind).getKey() == k) {
+                if (table.get(ind)!= null && table.get(ind).getKey().equals(k)) {
                     table.get(ind).setValue(v);
                 }
             }
@@ -61,7 +61,7 @@ public class HT {
         for (int i = 0; i < length; i++) {
             int ind = i + temp;
             if (ind >= length) ind -= length;
-            if (table.get(ind)!= null && table.get(ind).getKey() == k) {
+            if (table.get(ind)!= null && table.get(ind).getKey().equals(k)) {
                 return table.get(ind).getValue();
             }
         }
@@ -69,12 +69,13 @@ public class HT {
     }
 
     public static String  remove(String k) {
-        String str = get(k);
+        String str = null;
         int temp = hashFun(k);
         for (int i = 0; i < length; i++) {
             int ind = i + temp;
             if (ind >= length) ind -= length;
-            if (table.get(ind).getKey() == k) {
+            if (table.get(ind).getKey().equals(k)) {
+                str = table.get(ind).getValue();
                 table.set(ind, flag);
             }
         }

@@ -54,19 +54,18 @@ public class HT {
     }
 
     public static String  remove(String k) {
-        String str = get(k);
+        String str = null;
         int temp = hashFun(k);
-        // == null ret
         if (table[temp] != null) {
-            int ind = 0;
+            int ind = -1;
             for (Data data : table[temp])
                 if (data.getKey().equals(k)) {
                     ind = table[temp].indexOf(data);
+                    str = data.getValue();
                 }
             table[temp].remove(ind);
         }
         return str;
-        // ret null
     }
 
     public static void prn() {
