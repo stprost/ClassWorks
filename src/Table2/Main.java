@@ -3,7 +3,7 @@ package Table2;
 
 public class Main {
     public static void main(String[] args) {
-        HT t = new HT(5);
+        HT t = new HT();
         String str = t.put("a", "78w");
         System.out.println(str);
         str = t.put("a", "wwww");

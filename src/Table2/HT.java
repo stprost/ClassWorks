@@ -4,52 +4,51 @@ import java.util.ArrayList;
 
 public class HT {
     private static int length;
-    private static ArrayList<Data> table;
+    private static Data[] table;
     private static Data flag = new Data("0", "0");
-
-    public ArrayList<Data> getTable() {
-        return this.table;
-    }
 
     public static int hashFun(String key) {
         return key.hashCode() % length;
     }
 
-    public HT(int length) {
-        this.length = length;
-        table = new ArrayList<>();
-        for (int i = 0; i < length; i++) {
-            table.add(null);
-        }
+    public HT() {
+        length = 3;
+        table = new Data[length];
     }
 
     public static String put(String k, String v) {
         String str = get(k);
         int temp = hashFun(k);
-        if (str == "null") {
+        if (str == null) {
             Data data = new Data(k, v);
             int count = 0;
-            if (table.get(temp) == null) table.set(temp, data);
+            if (table[temp] == null) table[temp] = data;
             else {
                 for (int i = 1; i < length; i++) {
                     int ind = i + temp;
                     if (ind > length - 1) ind -= length;
-                    if (table.get(ind) == null || table.get(ind) == flag) {
-                        table.set(ind, data);
-                        length--;
+                    if (table[ind] == null || table[ind] == flag) {
+                        table[ind] = data;
                         count++;
                         break;
                     }
                 }
-                if (count == 0) table.add(data);
-                length++;
+                if (count == 0) {
+                    Data[] newTable = new Data[length + 10];
+                    for (int i = 0; i < length; i++) {
+                        newTable[i] = table[i];
+                    }
+                    table = new Data[length + 10];
+                    table = newTable;
+                    length += 10;
+                }
             }
         } else {
             for (int i = 0; i < length; i++) {
                 int ind = i + temp;
                 if (ind >= length) ind -= length;
-                if (table.get(ind)!= null && table.get(ind).getKey().equals(k)) {
-                    table.get(ind).setValue(v);
+                if (table[ind] != null && table[ind].getKey().equals(k)) {
+                    table[ind].setValue(v);
                 }
             }
         }
@@ -61,22 +60,22 @@ public class HT {
         for (int i = 0; i < length; i++) {
             int ind = i + temp;
             if (ind >= length) ind -= length;
-            if (table.get(ind)!= null && table.get(ind).getKey().equals(k)) {
-                return table.get(ind).getValue();
+            if (table[ind] != null && table[ind].getKey().equals(k)) {
+                return table[ind].getValue();
             }
         }
-        return "null";
+        return null;
     }
 
-    public static String  remove(String k) {
+    public static String remove(String k) {
         String str = null;
         int temp = hashFun(k);
         for (int i = 0; i < length; i++) {
             int ind = i + temp;
             if (ind >= length) ind -= length;
-            if (table.get(ind).getKey().equals(k)) {
-                str = table.get(ind).getValue();
-                table.set(ind, flag);
+            if (table[ind].getKey().equals(k)) {
+                str = table[ind].getValue();
+                table[ind] = flag;
             }
         }
         return str;
@@ -84,10 +83,10 @@ public class HT {
 
     public static void prn() {
         for (int i = 0; i < length; i++) {
-            if (table.get(i) == null) System.out.println("[" + i + "] -> null");
-            else if (table.get(i) == flag) System.out.println("[" + i + "] -> flag");
+            if (table[i] == null) System.out.println("[" + i + "] -> null");
+            else if (table[i] == flag) System.out.println("[" + i + "] -> flag");
             else
-                System.out.println("[" + i + "] -> " + "(" + table.get(i).getKey() + ", " + table.get(i).getValue() + ")");
+                System.out.println("[" + i + "] -> " + "(" + table[i].getKey() + ", " + table[i].getValue() + ")");
 
         }
     }

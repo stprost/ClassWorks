@@ -17,7 +17,7 @@ public class Main {
         graph.addWeight(4, new int[]{15, 11, 6});
         graph.addWeight(5, new int[]{6, 9});
         graph.addWeight(6, new int[]{9, 2, 14});
-        Integer[] answ = Dijkstra.dijkstra(graph, 1);
+        Integer[] answ = Dijkstra.dijkstra(graph, 4);
         System.out.println(Arrays.toString(answ));
     }
 }

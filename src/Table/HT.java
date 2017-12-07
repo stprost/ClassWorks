@@ -35,7 +35,7 @@ public class HT {
                 table[temp] = new ArrayList<Data>();
             }
             table[temp].add(data);
-        }else{
+        } else {
             for (Data data : table[temp])
                 if (data.getKey().equals(k))
                     data.setValue(v);
@@ -53,17 +53,17 @@ public class HT {
         return null;
     }
 
-    public static String  remove(String k) {
+    public static String remove(String k) {
         String str = null;
         int temp = hashFun(k);
         if (table[temp] != null) {
-            int ind = -1;
             for (Data data : table[temp])
                 if (data.getKey().equals(k)) {
-                    ind = table[temp].indexOf(data);
+                    int ind = table[temp].indexOf(data);
                     str = data.getValue();
+                    table[temp].remove(ind);
+                    return str;
                 }
-            table[temp].remove(ind);
         }
         return str;
     }
