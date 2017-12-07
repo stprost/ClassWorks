@@ -22,6 +22,10 @@ public class TPS {
     private int[] bestPath;
     private int bestInd;
 
+    public int[] getBestPath() {
+        return bestPath;
+    }
+
     class Ant {
         int tempCity;
         int nextCity;
@@ -55,7 +59,7 @@ public class TPS {
         this.maxDistance = maxDistance;
         maxTour = maxCities * maxDistance;
         q = maxTour;
-        maxTime = maxCities * 2;
+        maxTime = maxCities * 3;
         maxAnts = maxCities;
         minPher = 1.0 / maxCities;
         ants = new Ant[maxAnts];
@@ -87,6 +91,32 @@ public class TPS {
     }
 
     public double findTheWay() {
+        int time = 0;
+        int goal = 0;
+        for (int i = 0; i < maxAnts; i++) {
+            ants[i] = new Ant();
+            if (goal == maxCities) goal = 0;
+            ants[i].tempCity = goal++;
+            for (int j = 0; j < maxCities; j++) {
+                ants[i].used[j] = false;
+            }
+            ants[i].pathInd = 1;
+            ants[i].tourLength = 0;
+            ants[i].path[0] = ants[i].tempCity;
+            ants[i].used[ants[i].tempCity] = true;
+        }
+        while (time++ < maxTime) {
+            if (makeMove() == 0) {
+                pheromone();
+                if (time != maxTime) reloadAnts();
+            }
+        }
+        return bestTour;
+    }
+
+    public double findTheWayGreedy() {
+        alpha = 0.0;
+        bestTour = maxTour;
         int time = 0;
         int goal = 0;
         for (int i = 0; i < maxAnts; i++) {

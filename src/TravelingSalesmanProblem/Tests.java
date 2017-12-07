@@ -2,6 +2,8 @@ package TravelingSalesmanProblem;
 
 import org.junit.Test;
 
+import java.util.Arrays;
+
 import static org.junit.Assert.assertEquals;
 
 public class Tests {
@@ -67,5 +69,56 @@ public class Tests {
         tps.dist[3][4] = 4;
         tps.dist[4][3] = 4;
         assertEquals(12.0,tps.findTheWay(),0.0);
+    }
+
+    //Тесты на сравнения муравьиного алгоритма с жадным
+
+    //С 20 городами
+    @Test
+    public void test4(){
+        int itersQuantity = 20;
+        int count = 0;
+        for (int i = 0; i < itersQuantity; i++) {
+            TPS tps = new TPS(20, 100);
+            if(tps.findTheWay() < tps.findTheWayGreedy()) count++;
+        }
+        System.out.print("В "+count+" случаях "+"из "+itersQuantity+" муравьиный алгоритм лучше жадного.");
+    }
+
+    //С выводом на экран всех длин
+    @Test
+    public void test5(){
+        int itersQuantity = 20;
+        int count = 0;
+        for (int i = 0; i < itersQuantity; i++) {
+            TPS tps = new TPS(20, 100);
+            System.out.println(tps.findTheWay() + " " + tps.findTheWayGreedy());
+            if(tps.findTheWay() < tps.findTheWayGreedy()) count++;
+        }
+        System.out.print("В "+count+" случаях "+"из "+itersQuantity+" муравьиный алгоритм лучше жадного.");
+    }
+
+    //С 30 городами
+    @Test
+    public void test6(){
+        int itersQuantity = 20;
+        int count = 0;
+        for (int i = 0; i < itersQuantity; i++) {
+            TPS tps = new TPS(30, 100);
+            if(tps.findTheWay() < tps.findTheWayGreedy()) count++;
+        }
+        System.out.print("В "+count+" случаях "+"из "+itersQuantity+" муравьиный алгоритм лучше жадного.");
+    }
+
+    @Test
+    public void test7(){
+        int itersQuantity = 20;
+        int count = 0;
+        for (int i = 0; i < itersQuantity; i++) {
+            TPS tps = new TPS(30, 100);
+            System.out.println(tps.findTheWay() + " " + tps.findTheWayGreedy());
+            if(tps.findTheWay() < tps.findTheWayGreedy()) count++;
+        }
+        System.out.print("В "+count+" случаях "+"из "+itersQuantity+" муравьиный алгоритм лучше жадного.");
     }
 }
