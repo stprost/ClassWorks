@@ -6,17 +6,17 @@ public class TPS {
     private int maxCities;
     private int maxDistance;
     private int maxTour;
-    private double alpha = 1;
-    private double beta = 1;
+    private double alpha = 1.0;
+    private double beta = 1.0;
     private double ro = 0.6;
-    private int q = 100;
+    private int q;
     private int maxTime;
     private int maxAnts;
     private double minPher;
 
     private Ant[] ants;
     private City[] cities;
-    private double[][] dist;
+    public double[][] dist;
     private double[][] pher;
     private double bestTour;
     private int[] bestPath;
@@ -54,7 +54,8 @@ public class TPS {
         this.maxCities = maxCities;
         this.maxDistance = maxDistance;
         maxTour = maxCities * maxDistance;
-        maxTime = maxCities*2;
+        q = maxTour;
+        maxTime = maxCities * 2;
         maxAnts = maxCities;
         minPher = 1.0 / maxCities;
         ants = new Ant[maxAnts];
@@ -158,10 +159,13 @@ public class TPS {
         double p;
         double d = 0.0;
         for (int i = 0; i < maxCities; i++) {
-            d += (Math.pow(pher[start][i], alpha)) / (Math.pow((1.0 / dist[start][i]), beta));
+            if (start != i) {
+                d += (Math.pow(pher[start][i], alpha)) * (Math.pow((1.0 / dist[start][i]), beta));
+            }
         }
         while (true) {
             goal++;
+            if (start == goal) goal++;
             if (goal == maxCities) goal = 0;
             if (!ants[ant].used[goal]) {
                 p = num(start, goal) / d;
@@ -172,7 +176,7 @@ public class TPS {
     }
 
     private double num(int start, int goal) {
-        return (Math.pow(pher[start][goal], alpha)) / (Math.pow((1.0 / dist[start][goal]), beta));
+        return (Math.pow(pher[start][goal], alpha)) * (Math.pow((1.0 / dist[start][goal]), beta));
     }
 
 
