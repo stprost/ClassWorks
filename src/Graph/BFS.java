@@ -23,4 +23,20 @@ public class BFS {
         }
         return parent;
     }
+
+    public static int[] breadthFirstSearch(Graph graph, int start, int goal) {
+        int temp = goal;
+        ArrayDeque<Integer> queuePath = new ArrayDeque<>();
+        queuePath.addFirst(temp);
+        int[] bsf = breadthFirstSearch(graph, start);
+        while (temp != start) {
+            temp = bsf[temp];
+            queuePath.addFirst(temp);
+        }
+        int[] path = new int[queuePath.size()];
+        for (int i = 0; i < path.length; i++) {
+            path[i] = queuePath.pollFirst();
+        }
+        return path;
+    }
 }

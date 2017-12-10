@@ -27,20 +27,14 @@ public class HT {
                 for (int i = 1; i < length; i++) {
                     int ind = i + temp;
                     if (ind > length - 1) ind -= length;
-                    if (table[ind] == null || table[ind] == flag) {
+                    if (table[ind] == null) {
                         table[ind] = data;
                         count++;
                         break;
                     }
                 }
                 if (count == 0) {
-                    Data[] newTable = new Data[length + 10];
-                    for (int i = 0; i < length; i++) {
-                        newTable[i] = table[i];
-                    }
-                    table = new Data[length + 10];
-                    table = newTable;
-                    length += 10;
+                    System.out.println("Таблица заполнена");
                 }
             }
         } else {
@@ -75,7 +69,7 @@ public class HT {
             if (ind >= length) ind -= length;
             if (table[ind].getKey().equals(k)) {
                 str = table[ind].getValue();
-                table[ind] = flag;
+                table[ind] = null;
             }
         }
         return str;
