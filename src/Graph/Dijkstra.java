@@ -33,4 +33,7 @@ public class Dijkstra {
         return dist;
     }
 
+    public static int dijkstra(Graph graph, int start, int goal){
+        return dijkstra(graph, start)[goal];
+    }
 }
