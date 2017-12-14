@@ -12,6 +12,8 @@ public class Main {
         System.out.println();
         t.put("b", "w");
         t.put("c", "aaa");
+        t.prn();
+        System.out.println();
         t.remove("b");
         t.prn();
         System.out.println();
@@ -21,5 +23,6 @@ public class Main {
         String answ = t.get("c");
         System.out.println(answ);
         System.out.println();
+        t.put("g","weq");
     }
 }

@@ -15,10 +15,15 @@ public class DFS {
         path = new int[graph.getSize()];
     }
 
+    public static int[] getPath() {
+        return path;
+    }
+
     public static int[] depthfirstSearch(int start, int goal) {
         int temp = goal;
         ArrayDeque<Integer> queuePath = new ArrayDeque<>();
         queuePath.addFirst(temp);
+        path[start] = 0;
         dfs(start);
         while (temp != start) {
             temp = path[temp];
@@ -37,7 +42,6 @@ public class DFS {
         for (int next : graph.getGraphTable()[temp]) {
             if (!used[next]) {
                 dfs(next);
-                path[next] = temp;
             }
         }
     }

@@ -15,13 +15,15 @@ public class Main {
         graph.addNode(6, new int[]{2, 7});
         graph.addNode(7, new int[]{6, 5});
         graph.addNode(8, new int[]{5});
-        int[] answ = BFS.breadthFirstSearch(graph, 0, 6);
+        int[] answ = BFS.breadthFirstSearch(graph, 1, 4);
         System.out.println(Arrays.toString(answ));
+        answ = BFS.breadthFirstSearch(graph, 1);
         System.out.println();
+        System.out.println(Arrays.toString(answ));
 
         DFS dfs = new DFS(graph);
         answ = dfs.depthfirstSearch(0,6);
-        System.out.println(Arrays.toString(answ));
+        //System.out.println(Arrays.toString(answ));
         System.out.println();
 
         graph = new Graph(6);
@@ -37,8 +39,8 @@ public class Main {
         graph.addWeight(3, new int[]{15, 11, 6});
         graph.addWeight(4, new int[]{6, 9});
         graph.addWeight(5, new int[]{9, 2, 14});
-        Integer[] answ1 = Dijkstra.dijkstra(graph, 0);
-        int lenghth = Dijkstra.dijkstra(graph, 0, 4);
+        Integer[] answ1 = Dijkstra.dijkstra(graph, 2);
+        int lenghth = Dijkstra.dijkstra(graph, 2, 4);
         System.out.println(lenghth);
         System.out.println(Arrays.toString(answ1));
 
